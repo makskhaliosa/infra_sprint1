@@ -1,0 +1,85 @@
+server {
+    server_name 62.84.121.246 taskodzilla.hopto.org;
+
+    
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+
+    location / {
+        root    /var/www/taski;
+        index    index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/taskodzilla.hopto.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/taskodzilla.hopto.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = taskodzilla.hopto.org) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name 62.84.121.246 taskodzilla.hopto.org;
+    return 404; # managed by Certbot
+
+
+}
+server {
+    server_name 62.84.121.246 kittigramphoto.site;
+
+    location /media/ {
+        root /var/www/kittygram;
+    }
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    location / {
+        root    /var/www/kittygram;
+        index    index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/kittigramphoto.site/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/kittigramphoto.site/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = kittigramphoto.site) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name 62.84.121.246 kittigramphoto.site;
+    return 404; # managed by Certbot
+
+
+}

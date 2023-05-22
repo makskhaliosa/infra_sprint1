@@ -1,0 +1,6 @@
+IP: 62.84.121.246;
+name_taski: https://taskodzilla.hopto.org ;
+name_kittygram: https://kittigramphoto.site ;
+login: admin;
+password: 1234567890;
+
