@@ -11,12 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    '62.84.121.246',
-    '127.0.0.1',
-    'localhost',
-    'kittigramphoto.site'
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split()
 
 INSTALLED_APPS = [
     'django.contrib.admin',
